@@ -15,12 +15,12 @@ testCases.push(function (dbType, context) {
         ddoc: 'test-partial',
         name: 'type-x'
       });
-      Promise.all([write, index])
+     return Promise.all([write, index])
         .then(() => { done(); })
         .catch((err) => { done(err); });
     });
     it('should apply the partial filter', function (done) {
-      context.db.find({
+      return context.db.find({
         selector: { hello: 'world' },
         use_index: ['_design/test-partial', 'type-x']
       }).then((result) => {
